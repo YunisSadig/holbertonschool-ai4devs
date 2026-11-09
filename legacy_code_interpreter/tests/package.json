@@ -1,0 +1,12 @@
+{
+  "name": "jquery-1-12-4-characterization-tests",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Characterization tests that pin the behavior of the legacy jQuery 1.12.4 library",
+  "scripts": {
+    "test": "node --test jquery_characterization.test.js"
+  },
+  "devDependencies": {
+    "jsdom": "^31.0.0"
+  }
+}
