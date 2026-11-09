@@ -1,0 +1,38 @@
+{
+  "name": "T7_status_boundaries",
+  "input": "1.1.1.1 - - [10/Oct/2023:13:55:36 +0000] \"GET /a HTTP/1.1\" 100 1\n1.1.1.1 - - [10/Oct/2023:13:55:36 +0000] \"GET /b HTTP/1.1\" 599 1\n1.1.1.1 - - [10/Oct/2023:13:55:36 +0000] \"GET /c HTTP/1.1\" 600 1\n1.1.1.1 - - [10/Oct/2023:13:55:36 +0000] \"GET /d HTTP/1.1\" 099 1\n1.1.1.1 - - [10/Oct/2023:13:55:36 +0000] \"GET /e HTTP/1.1\" 99 1\n1.1.1.1 - - [10/Oct/2023:13:55:36 +0000] \"GET /f HTTP/1.1\" 1000 1\n",
+  "expected": {
+    "total_lines": 6,
+    "valid_requests": 2,
+    "malformed_lines": 4,
+    "malformed_reasons": {
+      "bad_format": 2,
+      "invalid_ip": 0,
+      "invalid_status": 2
+    },
+    "unique_ips": 1,
+    "status_distribution": {
+      "100": 1,
+      "599": 1
+    },
+    "status_class_distribution": {
+      "1xx": 1,
+      "2xx": 0,
+      "3xx": 0,
+      "4xx": 0,
+      "5xx": 1
+    },
+    "error_count": 1,
+    "error_rate": 0.5,
+    "total_bytes": 2,
+    "top_ips": [
+      {
+        "ip": "1.1.1.1",
+        "count": 2
+      }
+    ],
+    "methods": {
+      "GET": 2
+    }
+  }
+}

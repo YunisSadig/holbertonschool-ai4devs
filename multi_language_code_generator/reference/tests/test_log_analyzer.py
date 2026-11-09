@@ -1,6 +1,6 @@
 """Tests for the Python reference Log Analyzer (run: python -m unittest discover -s tests).
 
-Tests 1-6 load the six specification cases from tests/fixtures/*.json; the
+Fixture tests load all cases (six from the specification plus six extra edge cases) from tests/fixtures/*.json; the
 expected values there come from an independent Node.js check of the spec.
 """
 import glob
@@ -26,7 +26,7 @@ def line(ip='1.2.3.4', req='GET / HTTP/1.1', status=200, size=10):
 class SpecCaseTests(unittest.TestCase):
     def test_all_spec_cases_match_fixtures(self):
         files = sorted(glob.glob(os.path.join(HERE, 'fixtures', 'tc_*.json')))
-        self.assertEqual(len(files), 6)
+        self.assertGreaterEqual(len(files), 12)
         for path in files:
             with open(path, encoding='utf-8') as f:
                 case = json.load(f)

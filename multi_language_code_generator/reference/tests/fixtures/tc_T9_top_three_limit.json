@@ -1,0 +1,45 @@
+{
+  "name": "T9_top_three_limit",
+  "input": "5.5.5.5 - - [10/Oct/2023:13:55:36 +0000] \"GET /p0 HTTP/1.1\" 200 2\n5.5.5.5 - - [10/Oct/2023:13:55:36 +0000] \"GET /p1 HTTP/1.1\" 200 2\n5.5.5.5 - - [10/Oct/2023:13:55:36 +0000] \"GET /p2 HTTP/1.1\" 200 2\n4.4.4.4 - - [10/Oct/2023:13:55:36 +0000] \"GET /p3 HTTP/1.1\" 200 2\n4.4.4.4 - - [10/Oct/2023:13:55:36 +0000] \"GET /p4 HTTP/1.1\" 200 2\n3.3.3.3 - - [10/Oct/2023:13:55:36 +0000] \"GET /p5 HTTP/1.1\" 200 2\n3.3.3.3 - - [10/Oct/2023:13:55:36 +0000] \"GET /p6 HTTP/1.1\" 200 2\n2.2.2.2 - - [10/Oct/2023:13:55:36 +0000] \"GET /p7 HTTP/1.1\" 200 2\n1.1.1.1 - - [10/Oct/2023:13:55:36 +0000] \"GET /p8 HTTP/1.1\" 200 2\n",
+  "expected": {
+    "total_lines": 9,
+    "valid_requests": 9,
+    "malformed_lines": 0,
+    "malformed_reasons": {
+      "bad_format": 0,
+      "invalid_ip": 0,
+      "invalid_status": 0
+    },
+    "unique_ips": 5,
+    "status_distribution": {
+      "200": 9
+    },
+    "status_class_distribution": {
+      "1xx": 0,
+      "2xx": 9,
+      "3xx": 0,
+      "4xx": 0,
+      "5xx": 0
+    },
+    "error_count": 0,
+    "error_rate": 0,
+    "total_bytes": 18,
+    "top_ips": [
+      {
+        "ip": "5.5.5.5",
+        "count": 3
+      },
+      {
+        "ip": "3.3.3.3",
+        "count": 2
+      },
+      {
+        "ip": "4.4.4.4",
+        "count": 2
+      }
+    ],
+    "methods": {
+      "GET": 9
+    }
+  }
+}

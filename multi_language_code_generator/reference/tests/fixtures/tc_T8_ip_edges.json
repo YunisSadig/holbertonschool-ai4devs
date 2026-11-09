@@ -1,0 +1,45 @@
+{
+  "name": "T8_ip_edges",
+  "input": "0.0.0.0 - - [10/Oct/2023:13:55:36 +0000] \"GET / HTTP/1.1\" 200 1\n255.255.255.255 - - [10/Oct/2023:13:55:36 +0000] \"GET / HTTP/1.1\" 200 1\n256.0.0.1 - - [10/Oct/2023:13:55:36 +0000] \"GET / HTTP/1.1\" 200 1\n01.02.03.004 - - [10/Oct/2023:13:55:36 +0000] \"GET / HTTP/1.1\" 200 1\n1.2.3.4.5 - - [10/Oct/2023:13:55:36 +0000] \"GET / HTTP/1.1\" 200 1\n::1 - - [10/Oct/2023:13:55:36 +0000] \"GET / HTTP/1.1\" 200 1\n1..2.3 - - [10/Oct/2023:13:55:36 +0000] \"GET / HTTP/1.1\" 200 1\n",
+  "expected": {
+    "total_lines": 7,
+    "valid_requests": 3,
+    "malformed_lines": 4,
+    "malformed_reasons": {
+      "bad_format": 0,
+      "invalid_ip": 4,
+      "invalid_status": 0
+    },
+    "unique_ips": 3,
+    "status_distribution": {
+      "200": 3
+    },
+    "status_class_distribution": {
+      "1xx": 0,
+      "2xx": 3,
+      "3xx": 0,
+      "4xx": 0,
+      "5xx": 0
+    },
+    "error_count": 0,
+    "error_rate": 0,
+    "total_bytes": 3,
+    "top_ips": [
+      {
+        "ip": "0.0.0.0",
+        "count": 1
+      },
+      {
+        "ip": "01.02.03.004",
+        "count": 1
+      },
+      {
+        "ip": "255.255.255.255",
+        "count": 1
+      }
+    ],
+    "methods": {
+      "GET": 3
+    }
+  }
+}

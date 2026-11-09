@@ -1,0 +1,53 @@
+{
+  "name": "T10_classes_and_methods",
+  "input": "7.7.7.1 - - [10/Oct/2023:13:55:36 +0000] \"OPTIONS * HTTP/1.1\" 101 0\n7.7.7.2 - - [10/Oct/2023:13:55:36 +0000] \"PUT /x HTTP/2.0\" 301 5\n7.7.7.3 - - [10/Oct/2023:13:55:36 +0000] \"PATCH /x HTTP/1.0\" 400 5\n7.7.7.4 - - [10/Oct/2023:13:55:36 +0000] \"HEAD /x HTTP/1.1\" 503 -\n7.7.7.5 - - [10/Oct/2023:13:55:36 +0000] \"GET /x HTTP/1.1\" 200 7\n",
+  "expected": {
+    "total_lines": 5,
+    "valid_requests": 5,
+    "malformed_lines": 0,
+    "malformed_reasons": {
+      "bad_format": 0,
+      "invalid_ip": 0,
+      "invalid_status": 0
+    },
+    "unique_ips": 5,
+    "status_distribution": {
+      "101": 1,
+      "200": 1,
+      "301": 1,
+      "400": 1,
+      "503": 1
+    },
+    "status_class_distribution": {
+      "1xx": 1,
+      "2xx": 1,
+      "3xx": 1,
+      "4xx": 1,
+      "5xx": 1
+    },
+    "error_count": 2,
+    "error_rate": 0.4,
+    "total_bytes": 17,
+    "top_ips": [
+      {
+        "ip": "7.7.7.1",
+        "count": 1
+      },
+      {
+        "ip": "7.7.7.2",
+        "count": 1
+      },
+      {
+        "ip": "7.7.7.3",
+        "count": 1
+      }
+    ],
+    "methods": {
+      "GET": 1,
+      "HEAD": 1,
+      "OPTIONS": 1,
+      "PATCH": 1,
+      "PUT": 1
+    }
+  }
+}
