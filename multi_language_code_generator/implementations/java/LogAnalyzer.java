@@ -2,6 +2,7 @@ import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -101,21 +102,16 @@ public class LogAnalyzer {
         totalBytes += rawBytes.equals("-") ? 0L : Long.parseLong(rawBytes);
     }
 
-    /** error_rate as the exact JSON text used by every language (spec section 7). */
-    static String formatRate(long errorCount, long validRequests) {
+    /**
+     * error_rate as a number: round half up to 4 decimals using integer arithmetic
+     * (spec section 7). Trailing zeros are stripped, so 0 and 1 stay whole numbers.
+     */
+    static BigDecimal errorRate(long errorCount, long validRequests) {
         if (validRequests == 0) {
-            return "0";
+            return BigDecimal.ZERO;
         }
         long scaled = (errorCount * 20000L + validRequests) / (2L * validRequests);
-        if (scaled % 10000 == 0) {
-            return Long.toString(scaled / 10000);
-        }
-        String frac = String.format("%04d", scaled % 10000);
-        int end = frac.length();
-        while (frac.charAt(end - 1) == '0') {
-            end--;
-        }
-        return (scaled / 10000) + "." + frac.substring(0, end);
+        return BigDecimal.valueOf(scaled, 4).stripTrailingZeros();
     }
 
     /** Canonical JSON: 2-space indentation, fixed key order, trailing newline. */
@@ -151,7 +147,8 @@ public class LogAnalyzer {
         }
         sb.append("  },\n");
         sb.append("  \"error_count\": ").append(errorCount).append(",\n");
-        sb.append("  \"error_rate\": ").append(formatRate(errorCount, valid)).append(",\n");
+        // error_rate is written as a bare JSON number (never quoted), like Python and JavaScript.
+        sb.append("  \"error_rate\": ").append(errorRate(errorCount, valid).toPlainString()).append(",\n");
         sb.append("  \"total_bytes\": ").append(totalBytes).append(",\n");
         int top = Math.min(3, sorted.size());
         if (top == 0) {

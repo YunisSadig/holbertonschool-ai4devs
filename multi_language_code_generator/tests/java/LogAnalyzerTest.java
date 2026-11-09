@@ -53,11 +53,14 @@ public class LogAnalyzerTest {
         check("ip validation rejects 256.0.0.1", !LogAnalyzer.isValidIp("256.0.0.1"));
         check("ip validation rejects 1.2.3", !LogAnalyzer.isValidIp("1.2.3"));
         check("ip order is numeric", LogAnalyzer.ipCompare("10.0.0.9", "10.0.0.10") < 0);
-        check("rate 1/32 rounds half up to 0.0313", LogAnalyzer.formatRate(1, 32).equals("0.0313"));
-        check("rate 2/3 is 0.6667", LogAnalyzer.formatRate(2, 3).equals("0.6667"));
-        check("rate 5/5 prints 1", LogAnalyzer.formatRate(5, 5).equals("1"));
-        check("rate with no requests prints 0", LogAnalyzer.formatRate(0, 0).equals("0"));
-        check("rate 1/10000 prints 0.0001", LogAnalyzer.formatRate(1, 10000).equals("0.0001"));
+        check("rate 1/32 rounds half up to 0.0313", LogAnalyzer.errorRate(1, 32).toPlainString().equals("0.0313"));
+        check("rate 2/3 is 0.6667", LogAnalyzer.errorRate(2, 3).toPlainString().equals("0.6667"));
+        check("rate 5/5 prints 1", LogAnalyzer.errorRate(5, 5).toPlainString().equals("1"));
+        check("rate with no requests prints 0", LogAnalyzer.errorRate(0, 0).toPlainString().equals("0"));
+        check("rate 1/10000 prints 0.0001", LogAnalyzer.errorRate(1, 10000).toPlainString().equals("0.0001"));
+
+        String t1 = LogAnalyzer.analyzeToJson(new String(Files.readAllBytes(fixtures.resolve("T1_small.log")), StandardCharsets.UTF_8));
+        check("error_rate is an unquoted JSON number", t1.contains("\"error_rate\": 0.4,") && !t1.contains("\"error_rate\": \""));
 
         System.out.println(passed + " passed, " + failed + " failed");
         if (failed > 0) {
