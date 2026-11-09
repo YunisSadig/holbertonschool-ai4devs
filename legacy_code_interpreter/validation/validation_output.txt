@@ -1,0 +1,50 @@
+{"total":49,"passed":49,"failed":0}
+PASS version is 1.12.4  [1.12.4]
+PASS shallow extend replaces nested object  [{"z":2}]
+PASS deep extend merges nested objects  [{"y":1,"z":2}]
+PASS deep extend merges arrays by index  [[3,2]]
+PASS deep extend clones (does not alias) nested source objects
+PASS undefined values are skipped
+PASS null/undefined sources are ignored
+PASS target === copy loop guard (no infinite loop for self reference)
+PASS single argument extends jQuery itself  [1]
+PASS $("") returns empty set
+PASS $(null) returns empty set
+PASS $("#a") finds by id
+PASS $("#a").selector is "#a"  [#a]
+PASS $(html) creates elements
+PASS $(html, props) calls methods/attrs
+PASS $(expr, context) equals $(context).find(expr)
+PASS $("<div") (not ending with >) is treated as a selector, not HTML
+PASS $(DOMElement) wraps element
+PASS $.fn.init.prototype === $.fn
+PASS delegated handlers run before handlers bound directly on the delegation root  [direct-a,delegated-item,direct-list]
+PASS element-level direct handler runs first at its own element  [direct-a,delegated-item,direct-list]
+PASS stopImmediatePropagation prevents later handlers  [d1]
+PASS returning false stops propagation (outer handler not run)
+PASS namespaced trigger runs only matching handlers  [alpha]
+PASS delegated click on a disabled element is ignored  [0]
+PASS then() returns a new promise whose value is the callback result  [4 | then1:1,then2:2]
+PASS then() returns a promise (no resolve method)
+PASS pipe is the same function as then (back-compat)
+PASS returned promise is adopted by the chain  [inner-value]
+PASS rejection passes through then() when no fail handler is given
+PASS exceptions in then() callbacks are NOT converted to rejections (they propagate)  [true]
+PASS state transitions: pending -> resolved
+PASS resolved deferred cannot be rejected afterwards
+PASS done callbacks added after resolution still fire (memory)
+PASS "text json" converter turns the response text into an object  [{"a":1}]
+PASS converter exception yields "parsererror" (throws option is false)  [parsererror]
+PASS dataFilter receives raw text and the dataType  [["{\"a\":1}","json"]]
+PASS "text script" converter evaluates the response as code (globalEval)  [1]
+PASS multiple dataTypes ("text json") chain conversions in order  [{"a":1}]
+PASS custom converter "text up" is found by the "prev current" lookup  [{"A":1}]
+PASS two-step conversion text -> json -> wrapped uses an intermediate type  [{"wrapped":{"a":1}}]
+PASS $(" <b>x</b>trailing") parses the HTML and ignores text after the last ">"
+PASS $("<img>") creates an element from an arbitrary HTML string
+PASS Deferred callbacks run synchronously (before then() returns)
+PASS a returned native Promise is NOT adopted by then() (no .promise function): it becomes the value
+PASS ajax with an unknown dataType and no converter fails with "No conversion from text to nope"
+PASS deep extend pollutes Object.prototype via an own "__proto__" key (CVE-2019-11358 pattern)  [yes]
+PASS after pollution, jQuery's own for...in loops break (jqXHR[i] is not a function)  [true]
+PASS non-deep extend of the same payload does not pollute Object.prototype
