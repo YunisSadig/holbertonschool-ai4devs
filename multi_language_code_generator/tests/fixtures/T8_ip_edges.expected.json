@@ -1,0 +1,41 @@
+{
+  "total_lines": 7,
+  "valid_requests": 3,
+  "malformed_lines": 4,
+  "malformed_reasons": {
+    "bad_format": 0,
+    "invalid_ip": 4,
+    "invalid_status": 0
+  },
+  "unique_ips": 3,
+  "status_distribution": {
+    "200": 3
+  },
+  "status_class_distribution": {
+    "1xx": 0,
+    "2xx": 3,
+    "3xx": 0,
+    "4xx": 0,
+    "5xx": 0
+  },
+  "error_count": 0,
+  "error_rate": 0,
+  "total_bytes": 3,
+  "top_ips": [
+    {
+      "ip": "0.0.0.0",
+      "count": 1
+    },
+    {
+      "ip": "01.02.03.004",
+      "count": 1
+    },
+    {
+      "ip": "255.255.255.255",
+      "count": 1
+    }
+  ],
+  "methods": {
+    "GET": 3
+  }
+}

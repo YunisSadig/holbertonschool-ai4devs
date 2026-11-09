@@ -1,0 +1,33 @@
+{
+  "total_lines": 1,
+  "valid_requests": 1,
+  "malformed_lines": 0,
+  "malformed_reasons": {
+    "bad_format": 0,
+    "invalid_ip": 0,
+    "invalid_status": 0
+  },
+  "unique_ips": 1,
+  "status_distribution": {
+    "404": 1
+  },
+  "status_class_distribution": {
+    "1xx": 0,
+    "2xx": 0,
+    "3xx": 0,
+    "4xx": 1,
+    "5xx": 0
+  },
+  "error_count": 1,
+  "error_rate": 1,
+  "total_bytes": 12,
+  "top_ips": [
+    {
+      "ip": "8.8.8.8",
+      "count": 1
+    }
+  ],
+  "methods": {
+    "GET": 1
+  }
+}

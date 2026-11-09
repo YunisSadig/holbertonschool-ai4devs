@@ -54,6 +54,7 @@ JSON schema (abbreviated): all keys required, `additionalProperties: false`, int
 1. **Line splitting**: split on LF; remove one trailing CR from each line; a final empty piece after a trailing newline is ignored. Lines that are empty or contain only whitespace (space, tab) are skipped and **not** counted anywhere.
 2. **Format check** (no trimming of the line): it must match exactly this regular expression (ASCII, case-sensitive):
    `^(\S+) \S+ \S+ \[(\d{2}/[A-Z][a-z]{2}/\d{4}:\d{2}:\d{2}:\d{2} [+-]\d{4})\] "([A-Z]+) (\S+) (HTTP/\d\.\d)" (\d{3}) (\d+|-)$`
+   ASCII note: `\S` in this expression means any character other than space, tab, LF, CR, form feed or vertical tab (spelled out explicitly in the JavaScript version, because JavaScript's `\S` is Unicode-aware).
    A line that does not match is **malformed: bad_format**. The timestamp is checked by shape only (no calendar validation).
 3. **IP check**: group 1 must be four dot-separated decimal fields, each 1-3 digits with value 0-255. Otherwise **malformed: invalid_ip**. IPv6 is not supported; such a line counts as invalid_ip when the line shape matches.
 4. **Status check**: the three-digit status must be 100-599, otherwise **malformed: invalid_status**.

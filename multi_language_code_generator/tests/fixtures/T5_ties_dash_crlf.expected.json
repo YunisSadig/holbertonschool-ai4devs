@@ -1,0 +1,44 @@
+{
+  "total_lines": 7,
+  "valid_requests": 7,
+  "malformed_lines": 0,
+  "malformed_reasons": {
+    "bad_format": 0,
+    "invalid_ip": 0,
+    "invalid_status": 0
+  },
+  "unique_ips": 5,
+  "status_distribution": {
+    "200": 6,
+    "204": 1
+  },
+  "status_class_distribution": {
+    "1xx": 0,
+    "2xx": 7,
+    "3xx": 0,
+    "4xx": 0,
+    "5xx": 0
+  },
+  "error_count": 0,
+  "error_rate": 0,
+  "total_bytes": 36,
+  "top_ips": [
+    {
+      "ip": "10.0.0.9",
+      "count": 2
+    },
+    {
+      "ip": "10.0.0.10",
+      "count": 2
+    },
+    {
+      "ip": "9.0.0.1",
+      "count": 1
+    }
+  ],
+  "methods": {
+    "DELETE": 1,
+    "GET": 5,
+    "HEAD": 1
+  }
+}
