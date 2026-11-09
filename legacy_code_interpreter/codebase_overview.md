@@ -65,12 +65,12 @@ A concise list; the sections below give the evidence for each item.
 1. **Security issues documented for this version range (High).** NVD lists CVE-2015-9251, CVE-2019-11358, CVE-2020-11022 and CVE-2020-11023 as affecting jQuery versions that include 1.12.4. The matching code is present in the source (see "Security-relevant code observed").
 2. **Very old and no longer a target for new fixes (High).** Released 2016-05-20 (about 10.5 years old); CONTRIBUTING states that bugs in older released files are not fixed.
 3. **Heavy old-browser compatibility code (Medium).** 80 `Support:` comments and 148 IE-related lines in 30 files make the code long and conditional.
-4. **Dated build and test toolchain (Medium).** Grunt 0.4.5, jsdom 5.6.1, QUnit 1.17.1 and Travis jobs for Node.js 0.10 to 6; these may not run on a current Node.js (not tested here).
+4. **Dated build and test toolchain (Medium).** Grunt 0.4.5, jsdom 5.6.1, QUnit 1.17.1 and Travis jobs for Node.js 0.10 to 6; tested on Node.js v24.18.0: `npm install --ignore-scripts` succeeds (516 packages, many deprecation warnings), `grunt lint` passes, and the default `grunt` task builds `dist/` and runs the Node smoke tests without errors. `npm audit` reports 82 known vulnerabilities in this development dependency tree (1 low, 19 moderate, 49 high, 13 critical); they are build-time only, because `dependencies` is empty.
 5. **Global state and dynamic code evaluation (Medium).** Global `jQuery`/`$` and `jQuery.globalEval` in `src/ajax/script.js` and `src/manipulation.js`.
 6. **Deprecated API still shipped (Low).** `bind`, `unbind`, `delegate`, `undelegate` in `src/deprecated.js`.
 7. **Large modules (Low).** `src/event.js` has 1,134 lines and `src/ajax.js` 842.
 8. **Limited platform support (Low).** README: the 1.x branch does not support Node or other non-browser environments, and Sizzle cannot be removed.
-9. **No test results verified (limitation of this report).** The test suite exists (about 686 test registrations) but was not executed here.
+9. **Browser test suite not run (limitation of this report).** The QUnit suite exists (about 686 test registrations) but needs browsers; it was not executed here. Only lint, the build and the Node smoke tests were run (see item 4).
 
 ## Observed Legacy Characteristics and Technical Debt (details)
 These are observations from the source at this tag, not maintainer-reported issues.
@@ -86,7 +86,7 @@ The following public advisories were checked against the US National Vulnerabili
 - **CVE-2015-9251** (affects jQuery before 3.0.0): cross-domain Ajax without `dataType` can execute `text/javascript` responses. The 1.12.4 source registers a `"text script"` converter that calls `jQuery.globalEval` (`src/ajax/script.js`, lines 16-20).
 - **CVE-2019-11358** (before 3.4.0): prototype pollution through `jQuery.extend(true, {}, ...)`. In 1.12.4 `src/core.js` contains no `__proto__` check (0 matches in `src/`), consistent with the advisory.
 - **CVE-2020-11022** (starting with 1.12.0, before 3.5.0) and **CVE-2020-11023** (1.0.3 up to before 3.5.0): HTML from untrusted sources passed to DOM manipulation methods can run code. In 1.12.4 `jQuery.htmlPrefilter` just applies the `rxhtmlTag` regular expression replacement (`src/manipulation.js`, lines 33 and 288-290).
-I did not execute exploit code. Whether an application is vulnerable depends on how it uses these functions.
+I did not run exploit code against any real application. In an isolated, throw-away jsdom window I did reproduce the prototype-pollution behavior of `jQuery.extend` (see `ai_explanations.md` and `validation/`). Whether an application is vulnerable depends on how it uses these functions.
 
 ## Documented Limitations (from the repository documents)
 - README: browser support differs between master and the 1.x branch; legacy browsers such as IE6-8 are supported only on the 1.x branch.
@@ -97,7 +97,8 @@ I did not execute exploit code. Whether an application is vulnerable depends on 
 - **Framework:** QUnit 1.17.1 with sinon and qunit-assert-step; tests are in `test/unit/` (24 files). A search for test registrations finds about 686 `test(` / `QUnit.test(` / `asyncTest(` calls (an approximate count by pattern, not a tool-reported total).
 - **Runners:** `test/index.html` is the browser test page, the Grunt task `node_smoke_tests` (`build/tasks/node_smoke_tests.js`) runs smoke tests in Node (jsdom 5.6.1 is a devDependency), and `build/tasks/testswarm.js` supports TestSwarm; there is also a Promises/A+ test task.
 - **Lint:** JSHint and JSCS configuration files (`.jshintrc`, `.jscsrc`) and Grunt tasks `jshint`, `jscs`, `jsonlint`.
-- **Not done in this report:** I did not run the jQuery test suite, so no pass/fail numbers are given.
+- **What was run:** `npm install --ignore-scripts`, `grunt lint` (JSHint, JSCS and JSON lint: no errors) and the default `grunt` task (build, minify, Node smoke tests: no errors) on Node.js v24.18.0. The built `dist/jquery.js` is 293,430 bytes (87,736 gzipped) and `dist/jquery.min.js` 96,813 bytes (33,709 gzipped).
+- **Not run:** the browser-based QUnit suite (`test/index.html`), so no pass/fail numbers for the roughly 686 unit tests are given.
 
 ## Potential Modernization Opportunities
 - Upgrade to a supported jQuery version (the repository's latest tag in my clone is `4.0.0`, dated 2026-01-17) after checking the published upgrade guides; the jQuery Migrate plugin can help find removed APIs.
@@ -109,7 +110,7 @@ I did not execute exploit code. Whether an application is vulnerable depends on 
 ## Risks and Challenges
 - Compatibility code is tightly woven through the modules, so removing it is error-prone without a running test suite.
 - Plugins and application code that depend on global `$` and removed or changed behavior can break during upgrades.
-- The build tools and some test tools are pinned to very old versions; they may not install or run on a current Node.js, which makes rebuilding hard.
+- The build tools and some test tools are pinned to very old versions. They still install and run on Node.js v24.18.0 in my test, but with many deprecation warnings and 82 audited vulnerabilities in the dev dependency tree, so rebuilding is possible but not something to leave as-is.
 
 ## Evidence and Methodology
 All of the following were run on 2026-11-09 against a clone of https://github.com/jquery/jquery.
