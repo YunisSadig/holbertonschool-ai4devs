@@ -1,0 +1,43 @@
+{
+  "name": "T6_all_errors_rounding",
+  "input": "1.1.1.1 - - [10/Oct/2023:13:55:36 +0000] \"GET /x HTTP/1.1\" 404 1\n1.1.1.1 - - [10/Oct/2023:13:55:36 +0000] \"GET /x HTTP/1.1\" 503 1\n1.1.1.2 - - [10/Oct/2023:13:55:36 +0000] \"GET /x HTTP/1.1\" 200 1",
+  "expected": {
+    "total_lines": 3,
+    "valid_requests": 3,
+    "malformed_lines": 0,
+    "malformed_reasons": {
+      "bad_format": 0,
+      "invalid_ip": 0,
+      "invalid_status": 0
+    },
+    "unique_ips": 2,
+    "status_distribution": {
+      "200": 1,
+      "404": 1,
+      "503": 1
+    },
+    "status_class_distribution": {
+      "1xx": 0,
+      "2xx": 1,
+      "3xx": 0,
+      "4xx": 1,
+      "5xx": 1
+    },
+    "error_count": 2,
+    "error_rate": 0.6667,
+    "total_bytes": 3,
+    "top_ips": [
+      {
+        "ip": "1.1.1.1",
+        "count": 2
+      },
+      {
+        "ip": "1.1.1.2",
+        "count": 1
+      }
+    ],
+    "methods": {
+      "GET": 3
+    }
+  }
+}

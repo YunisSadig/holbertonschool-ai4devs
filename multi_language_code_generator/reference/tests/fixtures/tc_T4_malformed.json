@@ -1,0 +1,37 @@
+{
+  "name": "T4_malformed",
+  "input": "192.168.0.1 - - [10/Oct/2023:13:55:36 +0000] \"GET / HTTP/1.1\" 200 100\nthis is not a log line\n300.1.1.1 - - [10/Oct/2023:13:55:36 +0000] \"GET / HTTP/1.1\" 200 100\n192.168.0.9 - - [10/Oct/2023:13:55:36 +0000] \"GET / HTTP/1.1\" 999 100\n192.168.0.9 - - [10/Oct/2023:13:55:36 +0000] \"GET / HTTP/1.1\" 99 100\n192.168.0.1 - - [10/Oct/2023:13:55:36 +0000] \"GET / HTTP/1.1\" 200\n1.2.3 - - [10/Oct/2023:13:55:36 +0000] \"GET / HTTP/1.1\" 200 5",
+  "expected": {
+    "total_lines": 7,
+    "valid_requests": 1,
+    "malformed_lines": 6,
+    "malformed_reasons": {
+      "bad_format": 3,
+      "invalid_ip": 2,
+      "invalid_status": 1
+    },
+    "unique_ips": 1,
+    "status_distribution": {
+      "200": 1
+    },
+    "status_class_distribution": {
+      "1xx": 0,
+      "2xx": 1,
+      "3xx": 0,
+      "4xx": 0,
+      "5xx": 0
+    },
+    "error_count": 0,
+    "error_rate": 0,
+    "total_bytes": 100,
+    "top_ips": [
+      {
+        "ip": "192.168.0.1",
+        "count": 1
+      }
+    ],
+    "methods": {
+      "GET": 1
+    }
+  }
+}

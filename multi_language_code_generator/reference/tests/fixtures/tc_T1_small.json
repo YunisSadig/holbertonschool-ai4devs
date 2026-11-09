@@ -1,0 +1,49 @@
+{
+  "name": "T1_small",
+  "input": "192.168.0.1 - - [10/Oct/2023:13:55:36 +0000] \"GET /index.html HTTP/1.1\" 200 1024\n192.168.0.2 - - [10/Oct/2023:13:55:36 +0000] \"GET /about HTTP/1.1\" 200 512\n192.168.0.1 - - [10/Oct/2023:13:55:36 +0000] \"POST /login HTTP/1.1\" 302 0\n10.0.0.5 - - [10/Oct/2023:13:55:36 +0000] \"GET /missing HTTP/1.1\" 404 150\n10.0.0.5 - - [10/Oct/2023:13:55:36 +0000] \"GET /boom HTTP/1.1\" 500 75\n",
+  "expected": {
+    "total_lines": 5,
+    "valid_requests": 5,
+    "malformed_lines": 0,
+    "malformed_reasons": {
+      "bad_format": 0,
+      "invalid_ip": 0,
+      "invalid_status": 0
+    },
+    "unique_ips": 3,
+    "status_distribution": {
+      "200": 2,
+      "302": 1,
+      "404": 1,
+      "500": 1
+    },
+    "status_class_distribution": {
+      "1xx": 0,
+      "2xx": 2,
+      "3xx": 1,
+      "4xx": 1,
+      "5xx": 1
+    },
+    "error_count": 2,
+    "error_rate": 0.4,
+    "total_bytes": 1761,
+    "top_ips": [
+      {
+        "ip": "10.0.0.5",
+        "count": 2
+      },
+      {
+        "ip": "192.168.0.1",
+        "count": 2
+      },
+      {
+        "ip": "192.168.0.2",
+        "count": 1
+      }
+    ],
+    "methods": {
+      "GET": 4,
+      "POST": 1
+    }
+  }
+}
