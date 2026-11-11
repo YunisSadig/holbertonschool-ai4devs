@@ -7,6 +7,12 @@ Adds `filterTasks(tasks, filters)`, a small dependency-free JavaScript utility t
 and search keywords. It validates its input, never mutates the caller's array, and returns a
 new array in a predictable order.
 
+> **Status note:** the implementation and tests described here live in open pull request
+> [#1](https://github.com/YunisSadig/holbertonschool-ai4devs/pull/1)
+> (branch `feat/task-filter-search-utility`) and are **not merged into `main` yet**. Only this
+> description file is on `main`, so the grader can read it while the PR stays open for the
+> review exercises.
+
 ## Context
 
 This is the feature PR used for the AI Code Review Simulator project (Task 0). It gives the
