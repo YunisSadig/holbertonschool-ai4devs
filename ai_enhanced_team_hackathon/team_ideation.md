@@ -1,24 +1,50 @@
-# Team Ideation
+# AI-Enhanced Team Hackathon — Team Ideation
 
-## Brainstormed Ideas
-1. AI Study Buddy – generates quizzes and flashcards from lecture notes
-2. Smart Expense Splitter – AI parses receipts and splits bills among roommates
-3. AI Meeting Notes Assistant ✅ (chosen) – turns raw meeting transcripts into summaries, action items and follow-up tasks
+## 1. Brainstormed Ideas
 
-## Problem Statement
-Teams waste time after every meeting rewriting notes, hunting for decisions and chasing action items. Important tasks get lost in long transcripts or chat threads. An AI assistant can turn a transcript into a clear, structured summary with owners and deadlines in seconds.
+**Idea 1: Pathway AI — University Discovery Platform (Proposed Choice)**
 
-## MVP Features
-- Paste or upload a meeting transcript (text)
-- AI generates a concise summary of the meeting
-- AI extracts action items with owner and due date
-- Users can edit, check off and export action items (Markdown)
-- Meeting history list with search
+A web application that helps students discover, filter, and compare international university programmes based on their academic background, budget, and preferences.
 
-## Team Roles
-| Member | Role                     |
-|--------|--------------------------|
-| Yunis  | AI Prompt Strategist / Team Lead |
-| Aysel  | Frontend Dev (React)     |
-| Murad  | Backend/API Dev (Node.js) |
-| Leyla  | UI/UX & Testing Lead     |
+**Idea 2: AI CV Assistant**
+
+An application that analyzes CVs and provides suggestions for improving their structure, clarity, and relevance to specific job positions.
+
+**Idea 3: AI Study Planner**
+
+A productivity application that helps students organize assignments, prioritize deadlines, and create personalized study schedules.
+
+## 2. Chosen Problem Statement
+
+International students often struggle to find suitable universities because information about tuition fees, admission requirements, and available programmes is scattered across multiple websites.
+
+Pathway AI aims to simplify this process by providing a centralized university-discovery platform where students can explore programmes, compare options, and make more informed educational decisions.
+
+The proposed solution builds on an existing Pathway AI concept, subject to team agreement and any hackathon restrictions on reusing previous work.
+
+## 3. MVP Features
+
+1. **University Discovery:** Browse available universities and academic programmes.
+2. **Advanced Filtering:** Filter programmes by country, tuition fees, and study preferences.
+3. **Programme Comparison:** Compare selected programmes side by side.
+4. **Personal Shortlist:** Save universities for future consideration.
+5. **Assisted Recommendations:** Provide explanations of programme suitability using verified information, with a real AI integration if feasible.
+
+## 4. Team Roles
+
+| Member | Role | Responsibilities |
+|---|---|---|
+| To be assigned | Team Lead | Project coordination, planning, and scope management |
+| To be assigned | Frontend Developer | User interface, responsiveness, and interactions |
+| To be assigned | Backend Developer | APIs, data handling, and integration |
+| To be assigned | Testing & Presentation Lead | Testing, documentation, and final demonstration |
+
+*Team assignments are provisional and must be updated with actual members and responsibilities.*
+
+## 5. MVP Scope
+
+The goal is to deliver a functional demonstration within the hackathon's 24-hour timeframe.
+
+The team will prioritize a limited number of working features, a responsive user interface, basic testing, and a demonstration of the main user journey.
+
+Advanced functionality will be postponed if necessary to ensure the MVP is reliable and demonstrable.
